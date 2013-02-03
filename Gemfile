@@ -5,7 +5,8 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'mysql2'
+gem 'mongoid', "~> 3.0.0"
 
 
 # Gems used only for assets and not required
@@ -21,6 +22,29 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :test, :development do
+  gem "rspec-rails"
+end
+
+group :test do 
+  gem 'cucumber'
+  gem 'cucumber-rails', :require => false
+  gem 'simplecov',      :require => false
+  gem 'factory_girl_rails'
+  gem 'spork', "~> 1.0rc"
+  #gem "fakefs", :require => "fakefs/safe"
+  gem 'rb-fsevent'
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
+  gem 'launchy', ">= 2.0.5"
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
