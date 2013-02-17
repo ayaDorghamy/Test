@@ -1,25 +1,63 @@
-# SQLite version 3.x
-#   gem install sqlite3
+# MySQL.  Versions 4.1 and 5.0 are recommended.
+# 
+# Install the MYSQL driver
+#   gem install mysql2
 #
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+# Ensure the MySQL gem is defined in your Gemfile
+#   gem 'mysql2'
+#
+# And be sure to use new-style password hashing:
+#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: RevoReporting
+  #host: 10.30.1.12
+  host: 37.188.113.202
+  port: 3366
   pool: 5
-  timeout: 5000
+  username: root
+  #password: '123456'
+  password: 'RevoRules&Rocks'
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+test: &test
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: RevoReportingTest
   pool: 5
-  timeout: 5000
+  username: root
+  #socket: /var/lib/mysql/mysql.sock
+  #password: root
+  #socket: /tmp/mysql.sock
+  #socket: /var/run/mysqld/mysqld.sock
+
+staging:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: RevoReporting
+  pool: 5
+  port: 3366
+  host: 10.30.1.12
+  username: root
+  password: '123456'
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: RevoReporting
   pool: 5
-  timeout: 5000
+  port: 3366
+  #host: 10.178.19.249
+  host: 37.188.113.202
+  username: root
+  password: 'RevoRules&Rocks'
+
+cucumber:
+  <<: *test

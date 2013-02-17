@@ -46,9 +46,11 @@ CrmApi::Application.routes.draw do
   #     resources :products
   #   end
 
+  match 'server_requests/user_info' => 'server_request#user_info', :as => 'server_requests'
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'server_request#user_info'
 
   # See how all your routes lay out with "rake routes"
 
