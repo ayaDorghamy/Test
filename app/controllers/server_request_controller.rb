@@ -1,4 +1,3 @@
-require 'mongo'
 class ServerRequestController < ApplicationController
   respond_to :html, :json
   def show
@@ -13,6 +12,7 @@ class ServerRequestController < ApplicationController
     respond_with(data) do |format|
       format.json { render json: data, status: :created}
     end
+    binding.pry
   end
 
   private 
