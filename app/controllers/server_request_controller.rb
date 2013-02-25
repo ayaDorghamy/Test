@@ -1,23 +1,24 @@
+require 'mongo'
 class ServerRequestController < ApplicationController
   respond_to :html, :json
-  def show
-  end
 
   def user_info
-    @member_id = member_id(params[:device_id])
-    @team_ids = team_ids(@member_id)
-    @region_id = region_id(@member_id)
+    @device_id = device_id(params[:device_id])
+    @member_id = member_id(@device_id) if @device_id
+    @team_ids = team_ids(@member_id) if @member_id
+    @region_id = region_id(@member_id) if @member_id
 
     data = { 'team_ids' => @team_ids, 'region_id' => @region_id}
     respond_with(data) do |format|
       format.json { render json: data, status: :created}
     end
-    binding.pry
   end
 
   private 
     def member_id(device_id)
-      Member.where(device_id: device_id).to_a.first.id
+      member = Member.where(device_id: device_id).to_a.first
+      id = member.id if member
+      id
     end
 
     def team_ids(id)
@@ -27,6 +28,13 @@ class ServerRequestController < ApplicationController
     end
 
     def region_id(id)
-      Member.find(id).region_id
+      r_id = Member.find(id).region_id if id
+      r_id
+    end
+
+    def device_id(serial)
+      device = Device.where(serial: serial).to_a.first
+      id = device.id if device
+      id
     end
 end
